@@ -1,11 +1,10 @@
 <?php
 $target = "es";
 
-$parameters = array(
-    'ln',
-    'texto',
-    'formato'
-);
+function utf8_strrev($str){
+    preg_match_all('/./us', $str, $ar);
+    return join('', array_reverse($ar[0]));
+}
 
 function getlang($value, $array_p) {
     $langs = array(
@@ -24,6 +23,13 @@ function getlang($value, $array_p) {
     );
     return $langs[strtolower($value)];
 };
+
+
+$parameters = array(
+    'ln',
+    'texto',
+    'formato'
+);
 
 if (isset($_GET[$parameters[0]])) {
     $lang = getlang($_GET[$parameters[0]], $parameters);
@@ -255,13 +261,13 @@ if (isset($_GET[$parameters[1]]) && isset($_GET[$parameters[2]])) {
             )
         );
         break;
-        case 'rev':
+        case 'revertidas':
         $api = array (
             'ok' => true,
             'resultado' => array(
-                'texto'     => strrev($texto),
+                'texto'     => utf8_strrev($texto),
                 'formato'   => $formato,
-                'longitud'  => strlen($texto)
+                'longitud'  => strlen(utf8_strrev($texto))
             )
         );
         break;
