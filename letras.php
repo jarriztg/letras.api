@@ -1,5 +1,5 @@
 <?php
-$target = "es";
+$target = 'en';
 
 function utf8_strrev($str){
     preg_match_all('/./us', $str, $ar);
@@ -103,37 +103,148 @@ if (isset($_GET[$parameters[1]]) && isset($_GET[$parameters[2]])) {
         case 'tuenti':
         $rep = array(
             'a' => 'ａ',
+            'A' => 'Ａ',
             'b' => 'ｂ',
+            'B' => 'Ｂ',
             'c' => 'ｃ',
+            'C' => 'Ｃ',
             'd' => 'ｄ',
+            'D' => 'Ｄ',
             'e' => 'ｅ',
+            'E' => 'Ｅ',
             'f' => 'ｆ',
+            'F' => 'Ｆ',
             'g' => 'ｇ',
+            'G' => 'Ｇ',
             'h' => 'ｈ',
+            'H' => 'Ｈ',
             'i' => 'ｉ',
+            'I' => 'Ｉ',
             'j' => 'ｊ',
+            'J' => 'Ｊ',
             'k' => 'ｋ',
+            'K' => 'Ｋ',
             'l' => 'ｌ',
+            'L' => 'Ｌ',
             'm' => 'ｍ',
+            'M' => 'Ｍ',
             'n' => 'ｎ',
+            'N' => 'Ｎ',
             'o' => 'ｏ',
+            'O' => 'Ｏ',
             'p' => 'ｐ',
+            'P' => 'Ｐ',
             'q' => 'ｑ',
+            'Q' => 'Ｑ',
             'r' => 'ｒ',
+            'R' => 'Ｒ',
             's' => 'ｓ',
+            'S' => 'Ｓ',
             't' => 'ｔ',
+            'T' => 'Ｔ',
             'u' => 'ｕ',
+            'U' => 'Ｕ',
             'v' => 'ｖ',
+            'V' => 'Ｖ',
             'w' => 'ｗ',
+            'W' => 'Ｗ',
             'x' => 'ｘ',
+            'X' => 'Ｘ',
             'y' => 'ｙ',
-            'z' => 'ｚ'
+            'Y' => 'Ｙ',
+            'z' => 'ｚ',
+            'Z' => 'Z'
         );
 
         $texto = str_replace(
             array_keys($rep),
             array_values($rep),
-            strtolower($texto)
+            $texto
+        );
+
+        $api = array (
+            'ok' => true,
+            'resultado' => array(
+                'texto'     => $texto,
+                'formato'   => $formato,
+                'longitud'  => strlen($texto)
+            )
+        );
+        break;
+        case 'peques':
+        $rep = array(
+            'a' => 'ᵃ',
+            'b' => 'ᵇ',
+            'c' => 'ᶜ',
+            'd' => 'ᵈ',
+            'e' => 'ᵉ',
+            'f' => 'ᶠ',
+            'g' => 'ᵍ',
+            'h' => 'ʰ',
+            'i' => 'ᶥ',
+            'j' => 'ʲ',
+            'k' => 'ᵏ',
+            'l' => 'ˡ',
+            'm' => 'ᵐ',
+            'n' => 'ᵑ',
+            'o' => 'ᵒ',
+            'p' => 'ᵖ',
+            'q' => 'ᵠ',
+            'r' => 'ʳ',
+            's' => 'ˢ',
+            't' => 'ᵗ',
+            'u' => 'ᵘ',
+            'v' => 'ᵛ',
+            'w' => 'ʷ',
+            'x' => 'ˣ',
+            'y' => 'ʸ',
+            'z' => 'ᶻ',
+            'A' => 'ᴬ',
+            'B' => 'ᴮ',
+            'C' => 'C',
+            'D' => 'ᵈ',
+            'E' => 'ᵉ',
+            'F' => 'ғ',
+            'G' => 'ᴳ',
+            'H' => 'ᴴ',
+            'I' => 'ᴵ',
+            'J' => 'ᴶ',
+            'K' => 'ᴷ',
+            'L' => 'ᴸ',
+            'M' => 'ᴹ',
+            'N' => 'ᴺ',
+            'O' => 'ᴼ',
+            'P' => 'ᴾ',
+            'Q' => 'ᵠ',
+            'R' => 'ᴿ',
+            'S' => 'ˢ',
+            'T' => 'ᵀ',
+            'U' => 'ᵁ',
+            'V' => 'ᵛ',
+            'W' => 'ᵂ',
+            'X' => 'ᵡ',
+            'Y' => 'ᵞ',
+            'Z' => 'ᶻ',
+            '0' => '⁰',
+            '1' => '¹',
+            '2' => '²',
+            '3' => '³',
+            '4' => '⁴',
+            '5' => '⁵',
+            '6' => '⁶',
+            '7' => '⁷',
+            '8' => '⁸',
+            '9' => '₉',
+            '+' => '₊',
+            '-' => '₋',
+            '=' => '₌',
+            '//' => 'ϟ'
+        );
+
+        $texto = str_replace(
+            array_keys($rep),
+            array_values($rep),
+            $texto
         );
 
         $api = array (
@@ -187,6 +298,96 @@ if (isset($_GET[$parameters[1]]) && isset($_GET[$parameters[2]])) {
                 'texto'     => $texto,
                 'formato'   => $formato,
                 'longitud'  => strlen($texto)
+            )
+        );
+        break;
+        case 'azules':
+        $rep = array(
+            'a' => '🇦',
+            'b' => '🇧',
+            'c' => '🇨',
+            'd' => '🇩',
+            'e' => '🇪',
+            'f' => '🇫',
+            'g' => '🇬',
+            'h' => '🇭',
+            'i' => '🇮',
+            'j' => '🇯',
+            'k' => '🇰',
+            'l' => '🇱',
+            'm' => '🇲',
+            'n' => '🇳',
+            'o' => '🇴',
+            'p' => '🇵',
+            'q' => '🇶',
+            'r' => '🇷',
+            's' => '🇸',
+            't' => '🇹',
+            'u' => '🇺',
+            'v' => '🇻',
+            'w' => '🇼',
+            'x' => '🇽',
+            'y' => '🇾',
+            'z' => '🇿'
+        );
+
+        $texto = str_replace(
+            array_keys($rep),
+            array_values($rep),
+            strtolower($texto)
+        );
+
+        $api = array (
+            'ok' => true,
+            'resultado' => array(
+                'texto'     => $texto,
+                'formato'   => $formato,
+                'longitud'  => strlen($texto)
+            )
+        );
+        break;
+        case 'reflejo':
+        $rep = array(
+            'a' => 'ɐ',
+            'b' => 'q',
+            'c' => 'ɔ',
+            'd' => 'p',
+            'e' => 'ǝ',
+            'f' => 'ɟ',
+            'g' => 'ƃ',
+            'h' => 'ɥ',
+            'i' => 'ı',
+            'j' => 'ɾ',
+            'k' => 'ʞ',
+            'l' => 'l',
+            'm' => 'ɯ',
+            'n' => 'u',
+            'o' => 'o',
+            'p' => 'd',
+            'q' => 'b',
+            'r' => 'ɹ',
+            's' => 's',
+            't' => 'ʇ',
+            'u' => 'n',
+            'v' => 'ʌ',
+            'w' => 'ʍ',
+            'x' => 'x',
+            'y' => 'ʎ',
+            'z' => 'z'
+        );
+
+        $texto = str_replace(
+            array_keys($rep),
+            array_values($rep),
+            strtolower($texto)
+        );
+
+        $api = array (
+            'ok' => true,
+            'resultado' => array(
+                'texto'     => utf8_strrev($texto),
+                'formato'   => $formato,
+                'longitud'  => strlen(utf8_strrev($texto))
             )
         );
         break;
@@ -261,13 +462,43 @@ if (isset($_GET[$parameters[1]]) && isset($_GET[$parameters[2]])) {
             )
         );
         break;
-        case 'revertidas':
+        case 'invertidas':
         $api = array (
             'ok' => true,
             'resultado' => array(
                 'texto'     => utf8_strrev($texto),
                 'formato'   => $formato,
                 'longitud'  => strlen(utf8_strrev($texto))
+            )
+        );
+        break;
+        case 'tachadas':
+        $caracteres = preg_split('//u', $texto, -1, PREG_SPLIT_NO_EMPTY);
+        $finalstr = "";
+        for ($i=0; $i<sizeof($caracteres); $i++) {
+            $finalstr .= $caracteres[$i].trim(" ̶");
+        };
+        $api = array (
+            'ok' => true,
+            'resultado' => array(
+                'texto'     => $finalstr,
+                'formato'   => $formato,
+                'longitud'  => strlen($finalstr)
+            )
+        );
+        break;
+        case 'subrayadas':
+        $caracteres = preg_split('//u', $texto, -1, PREG_SPLIT_NO_EMPTY);
+        $finalstr = "";
+        for ($i=0; $i<sizeof($caracteres); $i++) {
+            $finalstr .= $caracteres[$i].trim(" ̲");
+        };
+        $api = array (
+            'ok' => true,
+            'resultado' => array(
+                'texto'     => $finalstr,
+                'formato'   => $formato,
+                'longitud'  => strlen($finalstr)
             )
         );
         break;
