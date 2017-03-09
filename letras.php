@@ -28,8 +28,11 @@ function getlang($value, $array_p) {
 $parameters = array(
     'ln',
     'texto',
-    'formato'
+    'formato',
+    'espacios'
 );
+
+$param_espacios = $_GET[$parameters[3]] === 'true'? true: false;
 
 if (isset($_GET[$parameters[0]])) {
     $lang = getlang($_GET[$parameters[0]], $parameters);
@@ -476,7 +479,32 @@ if (isset($_GET[$parameters[1]]) && isset($_GET[$parameters[2]])) {
         $caracteres = preg_split('//u', $texto, -1, PREG_SPLIT_NO_EMPTY);
         $finalstr = "";
         for ($i=0; $i<sizeof($caracteres); $i++) {
-            $finalstr .= $caracteres[$i].trim(" ̶");
+            $finalstr .= $caracteres[$i];
+            if (strcmp($caracteres[$i], " ")) {
+                $finalstr .= trim(" ̶");
+            } elseif ($param_espacios) {
+                $finalstr .= trim(" ̶");
+            };
+        };
+        $api = array (
+            'ok' => true,
+            'resultado' => array(
+                'texto'     => $finalstr,
+                'formato'   => $formato,
+                'longitud'  => strlen($finalstr)
+            )
+        );
+        break;
+        case 'subarriba':
+        $caracteres = preg_split('//u', $texto, -1, PREG_SPLIT_NO_EMPTY);
+        $finalstr = "";
+        for ($i=0; $i<sizeof($caracteres); $i++) {
+            $finalstr .= $caracteres[$i];
+            if (strcmp($caracteres[$i], " ")) {
+                $finalstr .= trim(" ̅ ");
+            } elseif ($param_espacios) {
+                $finalstr .= trim(" ̅ ");
+            };
         };
         $api = array (
             'ok' => true,
@@ -491,7 +519,12 @@ if (isset($_GET[$parameters[1]]) && isset($_GET[$parameters[2]])) {
         $caracteres = preg_split('//u', $texto, -1, PREG_SPLIT_NO_EMPTY);
         $finalstr = "";
         for ($i=0; $i<sizeof($caracteres); $i++) {
-            $finalstr .= $caracteres[$i].trim(" ̲");
+            $finalstr .= $caracteres[$i];
+            if (strcmp($caracteres[$i], " ")) {
+                $finalstr .= trim(" ̲");
+            } elseif ($param_espacios) {
+                $finalstr .= trim(" ̲");
+            };
         };
         $api = array (
             'ok' => true,
@@ -707,6 +740,5 @@ if (isset($_GET[$parameters[1]]) && isset($_GET[$parameters[2]])) {
     );
 
 }
-
 echo json_encode($api);
 ?>
