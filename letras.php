@@ -24,39 +24,7 @@ function getlang($value, $array_p) {
     return $langs[strtolower($value)];
 };
 
-
-$parameters = array(
-    'ln',
-    'texto',
-    'formato',
-    'espacios'
-);
-
-$param_espacios = $_GET[$parameters[3]] === 'true'? true: false;
-
-if (isset($_GET[$parameters[0]])) {
-    $lang = getlang($_GET[$parameters[0]], $parameters);
-    if (!$lang) {
-        $api = array (
-            'ok' => false,
-            'resultado' => array(
-                'error'         => 'lenguaje no disponible',
-                'error_codigo'  => 6
-            )
-        );
-        echo json_encode($api);
-        return;
-    }
-} else {
-    $lang = getlang($target, $parameters);
-};
-
-if (isset($_GET[$parameters[1]]) && isset($_GET[$parameters[2]])) {
-
-    $formato = $_GET[$parameters[2]];
-
-    $texto = $_GET[$parameters[1]];
-
+function make_text_format($texto, $formato) {
     switch ($formato) {
         case 'egipcias':
         $rep = array(
@@ -94,14 +62,6 @@ if (isset($_GET[$parameters[1]]) && isset($_GET[$parameters[2]])) {
             strtolower($texto)
         );
 
-        $api = array (
-            'ok' => true,
-            'resultado' => array(
-                    'texto'     => $texto,
-                    'formato'   => $formato,
-                    'longitud'  => strlen($texto)
-            )
-        );
         break;
         case 'tuenti':
         $rep = array(
@@ -165,14 +125,6 @@ if (isset($_GET[$parameters[1]]) && isset($_GET[$parameters[2]])) {
             $texto
         );
 
-        $api = array (
-            'ok' => true,
-            'resultado' => array(
-                'texto'     => $texto,
-                'formato'   => $formato,
-                'longitud'  => strlen($texto)
-            )
-        );
         break;
         case 'peques':
         $rep = array(
@@ -250,14 +202,6 @@ if (isset($_GET[$parameters[1]]) && isset($_GET[$parameters[2]])) {
             $texto
         );
 
-        $api = array (
-            'ok' => true,
-            'resultado' => array(
-                'texto'     => $texto,
-                'formato'   => $formato,
-                'longitud'  => strlen($texto)
-            )
-        );
         break;
         case 'cuadradas':
         $rep = array(
@@ -295,43 +239,35 @@ if (isset($_GET[$parameters[1]]) && isset($_GET[$parameters[2]])) {
             strtolower($texto)
         );
 
-        $api = array (
-            'ok' => true,
-            'resultado' => array(
-                'texto'     => $texto,
-                'formato'   => $formato,
-                'longitud'  => strlen($texto)
-            )
-        );
         break;
         case 'azules':
         $rep = array(
-            'a' => '🇦',
-            'b' => '🇧',
-            'c' => '🇨',
-            'd' => '🇩',
-            'e' => '🇪',
-            'f' => '🇫',
-            'g' => '🇬',
-            'h' => '🇭',
-            'i' => '🇮',
-            'j' => '🇯',
-            'k' => '🇰',
-            'l' => '🇱',
-            'm' => '🇲',
-            'n' => '🇳',
-            'o' => '🇴',
-            'p' => '🇵',
-            'q' => '🇶',
-            'r' => '🇷',
-            's' => '🇸',
-            't' => '🇹',
-            'u' => '🇺',
-            'v' => '🇻',
-            'w' => '🇼',
-            'x' => '🇽',
-            'y' => '🇾',
-            'z' => '🇿'
+            'a' => '🇦 ',
+            'b' => '🇧 ',
+            'c' => '🇨 ',
+            'd' => '🇩 ',
+            'e' => '🇪 ',
+            'f' => '🇫 ',
+            'g' => '🇬 ',
+            'h' => '🇭 ',
+            'i' => '🇮 ',
+            'j' => '🇯 ',
+            'k' => '🇰 ',
+            'l' => '🇱 ',
+            'm' => '🇲 ',
+            'n' => '🇳 ',
+            'o' => '🇴 ',
+            'p' => '🇵 ',
+            'q' => '🇶 ',
+            'r' => '🇷 ',
+            's' => '🇸 ',
+            't' => '🇹 ',
+            'u' => '🇺 ',
+            'v' => '🇻 ',
+            'w' => '🇼 ',
+            'x' => '🇽 ',
+            'y' => '🇾 ',
+            'z' => '🇿 '
         );
 
         $texto = str_replace(
@@ -340,14 +276,6 @@ if (isset($_GET[$parameters[1]]) && isset($_GET[$parameters[2]])) {
             strtolower($texto)
         );
 
-        $api = array (
-            'ok' => true,
-            'resultado' => array(
-                'texto'     => $texto,
-                'formato'   => $formato,
-                'longitud'  => strlen($texto)
-            )
-        );
         break;
         case 'reflejo':
         $rep = array(
@@ -385,14 +313,6 @@ if (isset($_GET[$parameters[1]]) && isset($_GET[$parameters[2]])) {
             strtolower($texto)
         );
 
-        $api = array (
-            'ok' => true,
-            'resultado' => array(
-                'texto'     => utf8_strrev($texto),
-                'formato'   => $formato,
-                'longitud'  => strlen(utf8_strrev($texto))
-            )
-        );
         break;
         case 'dobles':
         $rep = array(
@@ -456,24 +376,9 @@ if (isset($_GET[$parameters[1]]) && isset($_GET[$parameters[2]])) {
             $texto
         );
 
-        $api = array (
-            'ok' => true,
-            'resultado' => array(
-                'texto'     => $texto,
-                'formato'   => $formato,
-                'longitud'  => strlen($texto)
-            )
-        );
         break;
         case 'invertidas':
-        $api = array (
-            'ok' => true,
-            'resultado' => array(
-                'texto'     => utf8_strrev($texto),
-                'formato'   => $formato,
-                'longitud'  => strlen(utf8_strrev($texto))
-            )
-        );
+        $texto = utf8_strrev($texto);
         break;
         case 'tachadas':
         $caracteres = preg_split('//u', $texto, -1, PREG_SPLIT_NO_EMPTY);
@@ -486,14 +391,7 @@ if (isset($_GET[$parameters[1]]) && isset($_GET[$parameters[2]])) {
                 $finalstr .= trim(" ̶");
             };
         };
-        $api = array (
-            'ok' => true,
-            'resultado' => array(
-                'texto'     => $finalstr,
-                'formato'   => $formato,
-                'longitud'  => strlen($finalstr)
-            )
-        );
+        $texto = $finalstr;
         break;
         case 'subarriba':
         $caracteres = preg_split('//u', $texto, -1, PREG_SPLIT_NO_EMPTY);
@@ -506,14 +404,7 @@ if (isset($_GET[$parameters[1]]) && isset($_GET[$parameters[2]])) {
                 $finalstr .= trim(" ̅ ");
             };
         };
-        $api = array (
-            'ok' => true,
-            'resultado' => array(
-                'texto'     => $finalstr,
-                'formato'   => $formato,
-                'longitud'  => strlen($finalstr)
-            )
-        );
+        $texto = $finalstr;
         break;
         case 'subrayadas':
         $caracteres = preg_split('//u', $texto, -1, PREG_SPLIT_NO_EMPTY);
@@ -526,14 +417,20 @@ if (isset($_GET[$parameters[1]]) && isset($_GET[$parameters[2]])) {
                 $finalstr .= trim(" ̲");
             };
         };
-        $api = array (
-            'ok' => true,
-            'resultado' => array(
-                'texto'     => $finalstr,
-                'formato'   => $formato,
-                'longitud'  => strlen($finalstr)
-            )
-        );
+        $texto = $finalstr;
+        break;
+        case 'fuego':
+        $caracteres = preg_split('//u', $texto, -1, PREG_SPLIT_NO_EMPTY);
+        $finalstr = "";
+        for ($i=0; $i<sizeof($caracteres); $i++) {
+            if (strcmp($caracteres[$i], " ")) {
+                $finalstr .= "๖̶̶̶ۣۜ";
+            } elseif ($param_espacios) {
+                $finalstr .= "๖̶̶̶ۣۜ";
+            };
+            $finalstr .= $caracteres[$i];
+        };
+        $texto = $$finalstr;
         break;
         case 'cursivas':
         $rep = array(
@@ -597,15 +494,6 @@ if (isset($_GET[$parameters[1]]) && isset($_GET[$parameters[2]])) {
             $texto
         );
 
-        $api = array (
-            'ok' => true,
-            'resultado' => array(
-                'texto'     => $texto,
-                'formato'   => $formato,
-                'longitud'  => strlen($texto)
-            )
-        );
-
         break;
         case 'circulos':
         $rep = array(
@@ -641,15 +529,6 @@ if (isset($_GET[$parameters[1]]) && isset($_GET[$parameters[2]])) {
             array_keys($rep),
             array_values($rep),
             strtolower($texto)
-        );
-
-        $api = array (
-            'ok' => true,
-            'resultado' => array(
-                'texto'     => $texto,
-                'formato'   => $formato,
-                'longitud'  => strlen($texto)
-            )
         );
 
         break;
@@ -689,24 +568,99 @@ if (isset($_GET[$parameters[1]]) && isset($_GET[$parameters[2]])) {
             strtolower($texto)
         );
 
-        $api = array (
-            'ok' => true,
-            'resultado' => array(
-                'texto'     => $texto,
-                'formato'   => $formato,
-                'longitud'  => strlen($texto)
-            )
-        );
         break;
         default:
-        $api = array(
+        $texto = false;
+    };
+    return $texto;
+};
+
+$parameters = array(
+    'ln',
+    'texto',
+    'formato',
+    'espacios'
+);
+
+$param_espacios = false;
+if (isset($_GET[$parameters[3]])) {
+    $param_espacios = $_GET[$parameters[3]] == 'true' ? true: false;
+}
+
+if (isset($_GET[$parameters[0]])) {
+    $lang = getlang($_GET[$parameters[0]], $parameters);
+    if (!$lang) {
+        $api = array (
             'ok' => false,
             'resultado' => array(
-                'error'         => $lang["format_not_found"],
-                'error_codigo'  => 5
+                'error'         => 'lenguaje no disponible',
+                'error_codigo'  => 6
             )
         );
-        break;
+        echo json_encode($api)."\n";
+        return;
+    }
+} else {
+    $lang = getlang($target, $parameters);
+};
+
+if (isset($_GET[$parameters[1]]) && isset($_GET[$parameters[2]])) {
+    $formato = $_GET[$parameters[2]];
+    $texto = $_GET[$parameters[1]];
+    $formato_array = json_decode($formato);
+    if ($formato_array) {
+        $is_error = false;
+        $textos = array();
+        for ($i=0; $i<sizeof($formato_array); $i++) {
+            $tmp_text = make_text_format($texto, $formato_array[$i]);
+            if ($tmp_text) {
+                $textos[$formato_array[$i]] = make_text_format($texto, $formato_array[$i]);
+            } else {
+                $element_error = $formato_array[$i];
+                $is_error = true;
+                break;
+            };
+        }
+        if ($is_error) {
+            $api = array(
+                'ok' => false,
+                'resultado' => array(
+                    'error'         => $lang["format_not_found"],
+                    'value'       => $element_error,
+                    'error_codigo'  => 5
+                )
+            );
+        } else {
+            $api = array (
+                'ok' => true,
+                'resultado' => array(
+                    'texto'     => $textos,
+                    'longitud'  => sizeof($textos),
+                    'array' => true
+                )
+            );
+        }
+    } else {
+        $fmt = make_text_format($texto, $formato);
+        if (!$fmt) {
+            $api = array(
+                'ok' => false,
+                'resultado' => array(
+                    'error'         => $lang["format_not_found"],
+                    'error_codigo'  => 5
+                )
+            );
+        } else {
+            $api = array (
+                'ok' => true,
+                'resultado' => array(
+                    'texto'     => $fmt,
+                    'formato'   => $formato,
+                    'longitud'  => strlen($fmt),
+                    'array' => false
+                )
+            );
+        };
     }
 
 } elseif (!isset($_GET[$parameters[1]]) && isset($_GET[$parameters[2]]) ) {
